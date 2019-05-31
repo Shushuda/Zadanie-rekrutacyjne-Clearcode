@@ -88,7 +88,7 @@ class TestZadanie(unittest.TestCase):
 
             self.assertEqual(cm.exception.code, 0)
 
-    def test_argument_parser_one_argument(self):
+    def test_argument_parser_zero_arguments(self):
         """
         Test that the argument parser function reacts properly to too few arguments - zero.
         """
