@@ -21,7 +21,7 @@ def merge(persons_file, visits_file):
               "Check the headers and try again.")
         sys.exit()
 
-    # helper list objects containing above readers' data
+    # helper list objects containing readers' data
     # stores the OrderedDict objects in lists to make them iterable
     # (DictReader can be "iterated" only once, as it behaves like a reader object)
     persons = [row for row in persons_reader]
@@ -31,7 +31,7 @@ def merge(persons_file, visits_file):
 
     # iterates over the above lists of OrderedDicts to create output dicts with keys specified in the exercise's
     # description and counts the amount of visits per each person
-    # at the end of the outer for loop, the created dict is appended to the output list
+    # at the end of the outer for-loop, the created dict is appended to the output list
     for person in persons:
         visits_num = 0
 
@@ -63,7 +63,6 @@ def convert_file(given_file):
 # created for code clarity, reducing redundancy of code and ease of unit testing
 # exception handling for passing command line arguments to the script
 # informs the user of the cause of error and exits the script
-# exception handling for: wrong number of provided files (requires two), wrong filenames
 def file_exceptions(used_funct, given_file):
     try:
         result = used_funct(given_file)
@@ -75,13 +74,13 @@ def file_exceptions(used_funct, given_file):
 
 # helper function for parsing sys.args into easy to use variables
 # informs the user which arguments are needed for the script to work
-# provides -h descriptions of the script
-def argument_parser():
+# provides -h descriptions of the script and required args
+def argument_parser(given_args):
     parser = argparse.ArgumentParser(description="Merge two CSV files' data into a list of dictionaries.")
-    parser.add_argument('file_one')
-    parser.add_argument('file_two')
+    parser.add_argument('file_one', help="A CSV file containing persons in form: id, name, surname")
+    parser.add_argument('file_two', help="A CSV file containing visits in form: id, person_id, site")
 
-    arguments = parser.parse_args()
+    arguments = parser.parse_args(given_args)
 
     return arguments
 
@@ -98,6 +97,6 @@ def main(args):
 # executed when the script is run from the command line
 # needed for unittests to work properly
 if __name__ == '__main__':
-    arg = argument_parser()
+    arg = argument_parser(None)
     main(arg)
 
